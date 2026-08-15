@@ -16,6 +16,19 @@ services:
     networks:
       - mtproxy
 
+  xray:
+    image: teddysun/xray:latest
+    container_name: mtproxy-xray
+    restart: unless-stopped
+    depends_on:
+      - xray
+    volumes:
+      - ./xray/config.json:/etc/xray/config.json:ro
+    networks:
+      - mtproxy
+    security_opt:
+      - no-new-privileges:true
+
   telemt:
     image: whn0thacked/telemt-docker:latest
     container_name: mtproxy-telemt
