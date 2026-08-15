@@ -20,8 +20,6 @@ services:
     image: teddysun/xray:latest
     container_name: mtproxy-xray
     restart: unless-stopped
-    depends_on:
-      - xray
     volumes:
       - ./xray/config.json:/etc/xray/config.json:ro
     networks:
@@ -33,6 +31,8 @@ services:
     image: whn0thacked/telemt-docker:latest
     container_name: mtproxy-telemt
     restart: unless-stopped
+    depends_on:
+      - xray
     environment:
       RUST_LOG: "info"
     volumes:
